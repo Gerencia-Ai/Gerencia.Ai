@@ -2,7 +2,7 @@
 import { Text, ScrollView } from 'react-native';
 import  ProjCard  from '../components/ProjCard';
 
-export default function App() {
+export default function Projetos({navigation}) {
   return (
       <ScrollView className="flex-1  bg-main px-8 pb-28">
       
@@ -10,11 +10,11 @@ export default function App() {
             Seus Projetos
           </Text>
           
-          <ProjCard />
-          <ProjCard />
-          <ProjCard />
-          <ProjCard />
-          <ProjCard />
+          <ProjCard navigation={navigation}/>
+          <ProjCard navigation={navigation}/>
+          <ProjCard navigation={navigation}/>
+          <ProjCard navigation={navigation}/>
+          <ProjCard navigation={navigation}/>
       
     </ScrollView>
   );
