@@ -1,18 +1,38 @@
-import { Text, ScrollView, View, FlatList, Image, TextInput } from "react-native";
+import {
+  Text,
+  ScrollView,
+  View,
+  FlatList,
+  Image,
+  TextInput,
+} from "react-native";
 
-const Profile =  "https://lens-storage.storage.googleapis.com/png/2cb7d9a152804c0ba73f51a98e63b6a7"
+import commentService from "../services/comments";
+import { useEffect, useState } from "react";
+
+const Profile =
+  "https://lens-storage.storage.googleapis.com/png/2cb7d9a152804c0ba73f51a98e63b6a7";
 
 export default function Postagens() {
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const data = await commentService.getAllComments();
+      setComments(data);
+    }
+    fetchData();
+  }, []);
+
+
   return (
     <ScrollView className="flex-1  bg-main px-8 pb-28">
-
       <Text className="mt-16 mb-6 text-xl">
         Prazo extendido para quinta-feira
       </Text>
 
       {/* Post Body */}
       <View className="bg-secondary text-dark p-2 rounded-md border border-stroke my-2 divide-y divide-stroke">
-
         <View className="">
           <Text className="text-base font-semibold my-3">
             Lorem ipsum dolor sit amet:
@@ -32,13 +52,13 @@ export default function Postagens() {
 
           <Text className="opacity-70">
             dapibus nulla vel, dapibus ante. Maecenas condimentum iaculis magna,
-            id commodo nisi efficitur eu. Vivamus semper commodo odio sed rutrum.
-            Nullam quis velit vulputate, finibus quam sit amet, lacinia diam. Cras
-            ut eros non est scelerisque porta et eu velit. Phasellus ligula dui,
-            efficitur consectetur efficitur sit amet, finibus sed sem. Vivamus nec
-            ligula id erat volutpat dapibus quis a ex. Integer venenatis, arcu et
-            pulvinar gravida, tellus odio aliquet diam, ac posuere velit tellus
-            nec lorem.
+            id commodo nisi efficitur eu. Vivamus semper commodo odio sed
+            rutrum. Nullam quis velit vulputate, finibus quam sit amet, lacinia
+            diam. Cras ut eros non est scelerisque porta et eu velit. Phasellus
+            ligula dui, efficitur consectetur efficitur sit amet, finibus sed
+            sem. Vivamus nec ligula id erat volutpat dapibus quis a ex. Integer
+            venenatis, arcu et pulvinar gravida, tellus odio aliquet diam, ac
+            posuere velit tellus nec lorem.
           </Text>
 
           <Text className="opacity-60 font-bold my-3">
@@ -58,24 +78,31 @@ export default function Postagens() {
         </View>
 
         <View>
-
           <Text className="mb-3">10 Comentários</Text>
-          
-          {/* Comment Box */}
-          <View className="flex flex-row pr-12">
 
-            <Image className="w-10 h-10 rounded-full"  source={{uri : Profile}}></Image>
+          {/* Add Comment Box */}
+
+          <View className="flex flex-row pr-12">
+            <Image
+              className="w-10 h-10 rounded-full"
+              source={{ uri: Profile }}
+            ></Image>
             <View className="ml-2 flex justify-center w-full">
-              <TextInput placeholder="Adicione um comentário" multiline={true} />
-              <View className="border-b border-b-stroke">
-              </View>
+              <TextInput
+                placeholder="Adicione um comentário"
+                multiline={true}
+              />
+              <View className="border-b border-b-stroke"></View>
             </View>
-            
           </View>
         </View>
-
+        {/* Comment Box */}
+        <View className="flex flex-row pr-12">
+          {comments.map((comment) => (
+            <Text key={comment.id}> {comment.texto} </Text>
+          ))}
+        </View>
       </View>
-      
     </ScrollView>
   );
 }
