@@ -99,7 +99,7 @@ export default function Postagens() {
         {/* Comment Box */}
         <View className="flex flex-row pr-12">
           {comments.map((comment) => (
-            <Text key={comment.id}> {comment.texto} </Text>
+            <Text key={comment.id}>{comment.usuario} {comment.texto} </Text>
           ))}
         </View>
       </View>
