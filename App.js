@@ -1,5 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
-import { Text, View, ScrollView } from 'react-native';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -19,7 +17,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Projetos" component={Projetos} />
         <Stack.Screen name="Postagens" component={Postagens} />
-        <Stack.Screen name="Post" component={Post} />
+        <Stack.Screen name="Post" component={Post} />  
 
       </Stack.Navigator>
     </NavigationContainer>
