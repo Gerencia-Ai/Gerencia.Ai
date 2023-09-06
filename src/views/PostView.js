@@ -20,6 +20,7 @@ export default function Postagens() {
     async function fetchData() {
       const data = await commentService.getAllComments();
       setComments(data);
+      console.log(datas)
     }
     fetchData();
   }, []);
@@ -101,7 +102,7 @@ export default function Postagens() {
         <View className="flex flex-col pr-12 mt-2">
           {comments.map((comment) => (
             <View className="mt-1 flex flex-col w-full" key={comment.id}>
-              <Text className="text-shadow text-sm w-full"> {comment.usuario} </Text> 
+              <Text className="text-shadow text-sm w-full"> {comment.usuario} </Text>
               <Text className="text-sm"> {comment.texto} </Text>
             </View>
           ))}
