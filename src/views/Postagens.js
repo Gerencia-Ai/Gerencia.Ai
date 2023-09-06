@@ -1,54 +1,45 @@
-import commentService from "../services/comments";
-import { useEffect, useState } from "react";
-import React, { Component } from 'react'
-import { Text, View , Pressable, ScrollView } from 'react-native';
-import { useNavigation } from "@react-navigation/native";
+import { Text, ScrollView, ActivityIndicator } from 'react-native';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import PostCard from '../components/PostCard';
+import { useRecoilValue } from 'recoil';
+import { userToken } from '../store/atoms';
 
 
-
-export default function Posts() {
+export default function Projetos({ navigation, route }) {
+  const project = route.params.project;
   const [posts, setPosts] = useState([]);
-  const navigation = useNavigation();
-
+  const [loading, setLoading] = useState(false);
+  const token = useRecoilValue(userToken);
+  function fetch() {
+    axios.get('https://gerenciaback-iy0h-dev.fl0.io/api/posts/', {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then((response) => {
+      setLoading(false);
+      setPosts(response.data);
+      console.log(response.data)
+    }).catch((error) => {
+      console.log(error);
+      setLoading(false);
+    })
+  }
   useEffect(() => {
-    async function fetchData() {
-      const data = await postService.getAllPosts();
-      setPosts(data);
-    }
-    fetchData();
+    setLoading(true);
+    fetch();
   }, []);
 
+
   return (
-      <ScrollView className="flex-1  bg-main px-8 pb-28">
-      
-          <Text className="mt-16 mb-6 text-2xl">
-            Postagens
-          </Text>
-          {posts.map((post) => (
-            <Pressable className="bg-secondary p-2 rounded-md border border-stroke my-2 text-dark divide-y divide-stroke" onPress={() => navigation.navigate('Post')}>
-              <View className="pb-1">
-                <Text>
-                  Professor 1 postou um novo comunicado:
-                </Text>
+    <ScrollView className="flex-1  bg-main px-8 pb-28">
 
-                <Text className="my-2 font-medium text-lg">
-                  {post.titulo}
-                </Text>
-
-                <Text className="text-xs opacity-70">
-                {post.descricao}
-                </Text>
-              </View>
-              <View>
-                <Text className="mt-3">
-                  10 Comentários
-                </Text>
-              </View>
-
-            </Pressable>
-          ))}
-      
-      
+      <Text className="mt-16 mb-6 text-2xl">
+        Postagens em {project.nome}
+      </Text>
+      {posts.map((post) => (
+        <PostCard key={post.id} post={post} navigation={navigation} />
+      ))}
     </ScrollView>
   );
 }
