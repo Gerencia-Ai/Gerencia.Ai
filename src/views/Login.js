@@ -62,9 +62,9 @@ export default function App({ navigation }) {
     };
 
     return (
-        <View className="flex-1 items-center justify-center bg-main px-8">
+        <View className="flex-1 items-center justify-center bg-main px-3">
             <View className="lg:h-2/3  w-full bg-secondary rounded-lg overflow-hidden border border-stroke shadow-xl shadow-shadow"></View>
-            <View className="h-1/2 bg-highlight flex justify-end p-2 w-full">
+            <View className="h-32  bg-highlight flex justify-center p-2 w-full">
                 <Text className="text-4xl text-secondary">Login</Text>
             </View>
 
@@ -81,7 +81,11 @@ export default function App({ navigation }) {
                         <TextInput
                             placeholder="Email"
                             onBlur={onBlur}
-                            className="my-2 border border-stroke rounded-md px-32 py-2 w-full"
+                            className="my-2 border border-stroke rounded-md px-2"
+                            style={{
+                                width: 350,
+                                height: 40, // Set the height as needed
+                            }}
                             onChangeText={onChange}
                             value={value}
                         />
@@ -102,7 +106,11 @@ export default function App({ navigation }) {
                             placeholder="Senha"
                             secureTextEntry={true}
                             onBlur={onBlur}
-                            className="my-2 border border-stroke rounded-md px-32 py-2 w-full"
+                            className="my-2 border border-stroke rounded-md px-2"
+                            style={{
+                                width: 350,
+                                height: 40, // Set the height as needed
+                            }}
                             onChangeText={onChange}
                             value={value}
                         />
