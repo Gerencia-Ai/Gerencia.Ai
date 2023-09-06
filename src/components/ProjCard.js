@@ -10,7 +10,7 @@ const Banner = "https://www.usinainfo.com.br/blog/wp-content/uploads/2016/07/IMG
 class ProjCard extends Component {
   render() {
     return (
-      <Pressable className="bg-secondary p-2 rounded-md border border-stroke my-2 h-72" onPress={() => this.props.navigation.navigate('Postagens')}>
+      <Pressable className="bg-secondary p-2 rounded-md border border-stroke my-2 h-72" onPress={() => this.props.navigation.navigate('Postagens', { project: this.props.projeto })}>
         <Text className="text-highlight font-bold text-xl">
           {this.props.projeto.nome}
         </Text>
