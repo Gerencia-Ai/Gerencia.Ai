@@ -18,8 +18,6 @@ import Post from './src/views/PostView';
 
 const Stack = createNativeStackNavigator();
 
-
-
 export default function App() {
   return (
     <RecoilRoot>

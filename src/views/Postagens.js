@@ -40,7 +40,6 @@ export default function Projetos({ navigation, route }) {
       {posts.map((post) => (
         <PostCard key={post.id} post={post} navigation={navigation} />
       ))}
-
     </ScrollView>
   );
 }
