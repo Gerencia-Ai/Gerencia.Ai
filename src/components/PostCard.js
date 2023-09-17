@@ -24,7 +24,7 @@ class ProjCard extends Component {
         </View>
         <View>
           <Text className="mt-3">
-            Ontem
+            {this.props.post.data}
           </Text>
         </View>
 
