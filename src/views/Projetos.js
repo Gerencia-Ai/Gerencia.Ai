@@ -18,7 +18,7 @@ export default function Projetos({ navigation }) {
 
   useEffect(() => {
     setLoading(true);
-    axios.get('https://gerenciaback-iy0h-dev.fl0.io/api/projetos/', {
+    axios.get('https://gerencia-back-7ap3-dev.fl0.io/api/projetos', {
       headers: {
         'Authorization': 'Bearer ' + token
       }

@@ -12,7 +12,7 @@ export default function Projetos({ navigation, route }) {
   const [loading, setLoading] = useState(false);
   const token = useRecoilValue(userToken);
   function fetch() {
-    axios.get('https://gerenciaback-iy0h-dev.fl0.io/api/posts/', {
+    axios.get('https://gerencia-back-7ap3-dev.fl0.io/api/posts/', {
       headers: {
         'Authorization': 'Bearer ' + token
       }

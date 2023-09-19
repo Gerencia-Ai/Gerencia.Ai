@@ -22,7 +22,7 @@ class ProjCard extends Component {
         )}
 
         <View>
-          <Image className="w-full h-52 rounded-md opacity-75" source={{ uri: Banner }} />
+          <Image className="w-full h-52 rounded-md opacity-75" source={{ uri: this.props.projeto.capa.file }} />
           <View className="w-full h-52 rounded-md bg-gradient-to-r from-secondary to-highlight" ></View>
         </View>
       </Pressable>
