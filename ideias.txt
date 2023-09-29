@@ -1,0 +1,1 @@
+[formatação de texto] https://www.npmjs.com/package/react-native-parsed-text
