@@ -1,1 +1,3 @@
 [formatação de texto] https://www.npmjs.com/package/react-native-parsed-text
+
+[github] Criar app no github
