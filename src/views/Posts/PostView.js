@@ -1,14 +1,7 @@
-import {
-  Text,
-  ScrollView,
-  View,
-  FlatList,
-  Image,
-  TextInput,
-} from "react-native";
-
-import commentService from "../services/comments";
+import { Text, ScrollView, View, Image, TextInput } from "react-native";
+import commentService from "../../services/comments";
 import { useEffect, useState } from "react";
+import ParsedText from "react-native-parsed-text";
 
 const Profile =
   "https://lens-storage.storage.googleapis.com/png/2cb7d9a152804c0ba73f51a98e63b6a7";
@@ -20,18 +13,32 @@ export default function Postagens() {
     async function fetchData() {
       const data = await commentService.getAllComments();
       setComments(data);
-      console.log(datas)
     }
     fetchData();
   }, []);
 
-
+  const [text, setText] = useState("");
 
   return (
     <ScrollView className="flex-1  bg-main px-8 pb-28">
-      <Text className="mt-16 mb-6 text-xl">
-        Prazo extendido para quinta-feira
-      </Text>
+      <ParsedText
+        className="mt-16 mb-6 text-xl"
+        parse={[
+          {
+            pattern: /\*([^\*]+)\*/,
+            style: { fontWeight: "bold", color: "#FFC107" },
+            renderText: (text) => text.replace(/\*(.*?)\*/g, "$1"),
+          },
+          {
+            // red
+            pattern: /\!([^\!]+)\!/,
+            style: { fontWeight: "bold", color: "#dc2626" },
+            renderText: (text) => text.replace(/\!(.*?)\!/g, "$1"),
+          },
+        ]}
+      >
+        Prazo *extendido* para !quinta-feira!
+      </ParsedText>
 
       {/* Post Body */}
       <View className="bg-secondary text-dark p-2 rounded-md border border-stroke my-2 divide-y divide-stroke">
@@ -65,7 +72,7 @@ export default function Postagens() {
 
           <Text className="opacity-60 font-bold my-3">
             Sed cursus erat ac lacus elementum:
-            <FlatList
+            {/* <FlatList
               data={[
                 { key: "id ornare lorem" },
                 { key: "accumsan" },
@@ -75,12 +82,12 @@ export default function Postagens() {
               renderItem={({ item }) => (
                 <Text className="opacity-70">● {item.key};</Text>
               )}
-            />
+            /> */}
           </Text>
         </View>
 
         <View>
-          <Text className="mb-3">10 Comentários</Text>
+          <Text className="mb-3">{comments.length} Comentários</Text>
 
           {/* Add Comment Box */}
 
@@ -102,7 +109,10 @@ export default function Postagens() {
         <View className="flex flex-col pr-12 mt-2">
           {comments.map((comment) => (
             <View className="mt-1 flex flex-col w-full" key={comment.id}>
-              <Text className="text-shadow text-sm w-full"> {comment.usuario} </Text>
+              <Text className="text-shadow text-sm w-full">
+                {" "}
+                {comment.usuario}{" "}
+              </Text>
               <Text className="text-sm"> {comment.texto} </Text>
             </View>
           ))}

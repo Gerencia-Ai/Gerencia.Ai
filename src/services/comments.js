@@ -1,4 +1,4 @@
-import api from '../plugins/api'
+import api from '../plugins/api/api'
 
 class commentService {
   async getAllComments() {
