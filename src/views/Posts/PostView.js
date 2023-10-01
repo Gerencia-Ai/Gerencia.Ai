@@ -1,7 +1,7 @@
 import { Text, ScrollView, View, Image, TextInput } from "react-native";
-
 import commentService from "../../services/comments";
 import { useEffect, useState } from "react";
+import ParsedText from "react-native-parsed-text";
 
 const Profile =
   "https://lens-storage.storage.googleapis.com/png/2cb7d9a152804c0ba73f51a98e63b6a7";
@@ -17,11 +17,28 @@ export default function Postagens() {
     fetchData();
   }, []);
 
+  const [text, setText] = useState("");
+
   return (
     <ScrollView className="flex-1  bg-main px-8 pb-28">
-      <Text className="mt-16 mb-6 text-xl">
-        Prazo extendido para quinta-feira
-      </Text>
+      <ParsedText
+        className="mt-16 mb-6 text-xl"
+        parse={[
+          {
+            pattern: /\*([^\*]+)\*/,
+            style: { fontWeight: "bold", color: "#FFC107" },
+            renderText: (text) => text.replace(/\*(.*?)\*/g, "$1"),
+          },
+          {
+            // red
+            pattern: /\!([^\!]+)\!/,
+            style: { fontWeight: "bold", color: "#dc2626" },
+            renderText: (text) => text.replace(/\!(.*?)\!/g, "$1"),
+          },
+        ]}
+      >
+        Prazo *extendido* para !quinta-feira!
+      </ParsedText>
 
       {/* Post Body */}
       <View className="bg-secondary text-dark p-2 rounded-md border border-stroke my-2 divide-y divide-stroke">
