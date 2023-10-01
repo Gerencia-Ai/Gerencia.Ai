@@ -2,6 +2,7 @@ import { Text, ScrollView, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import ProjCard from "../../components/Projects/ProjectCard";
 import { getAll } from "../../services/Getters/projects";
+import EnterDebug from "../../components/globals/EnterDebug";
 
 export default function Projetos({ navigation }) {
   //state for posts
@@ -16,7 +17,7 @@ export default function Projetos({ navigation }) {
       });
       setProjects(response);
       setLoading(false);
-    } catch (a) {
+    } catch (error) {
       setLoading(false);
     }
   };
@@ -27,15 +28,22 @@ export default function Projetos({ navigation }) {
   }, []);
 
   return (
-    <ScrollView className="flex-1  bg-main px-8 pb-28">
-      <Text className="mt-16 mb-6 text-2xl">Seus Projetos</Text>
-      {/* Loading indicator */}
-      {loading && <ActivityIndicator size="large" color="#0000ff" />}
-      {!projects && !loading && <Text>Nenhum projeto encontrado</Text>}
+    <>
+      <ScrollView className="flex-1  bg-main px-8 pb-28">
+        <Text className="mt-16 mb-6 text-2xl">Seus Projetos</Text>
+        {/* Loading indicator */}
+        {loading && <ActivityIndicator size="large" color="#0000ff" />}
+        {!projects && !loading && <Text>Nenhum projeto encontrado</Text>}
 
-      {projects.map((project) => (
-        <ProjCard key={project.id} projeto={project} navigation={navigation} />
-      ))}
-    </ScrollView>
+        {projects.map((project) => (
+          <ProjCard
+            key={project.id}
+            projeto={project}
+            navigation={navigation}
+          />
+        ))}
+      </ScrollView>
+      <EnterDebug navigation={navigation} />
+    </>
   );
 }

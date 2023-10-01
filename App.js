@@ -10,6 +10,8 @@ import Projetos from "./src/views/Projects/Projects.js";
 import Login from "./src/views/LoginAndRegister/Login.js";
 import Postagens from "./src/views/Posts/Postagens.js";
 import Post from "./src/views/Posts/PostView.js";
+import Debug from "./src/views/Debug/Debug";
+
 import { useEffect, useState } from "react";
 
 const Stack = createNativeStackNavigator();
@@ -22,8 +24,9 @@ export default function App() {
     const userLoggedIn = getItem("token");
     console.log(
       "🚀 ~ file: App.js:23 ~ useEffect ~ userLoggedIn:",
-      userLoggedIn
+      typeof userLoggedIn
     );
+
     if (typeof userLoggedIn === "string") {
       setLoggedIn(true);
     }
@@ -37,10 +40,11 @@ export default function App() {
             headerShown: false,
           }}
         >
-          {logged ? <Stack.Screen name="Login" component={Login} /> : null}
+          {!logged ? <Stack.Screen name="Login" component={Login} /> : null}
           <Stack.Screen name="Projetos" component={Projetos} />
           <Stack.Screen name="Postagens" component={Postagens} />
           <Stack.Screen name="Post" component={Post} />
+          <Stack.Screen name="Debug" component={Debug} />
         </Stack.Navigator>
       </NavigationContainer>
     </RecoilRoot>

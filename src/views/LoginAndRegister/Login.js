@@ -46,6 +46,7 @@ export default function App({ navigation }) {
     if (status) {
       await saveItem("token", status.access);
       setLoading(false);
+      navigation.replace("Projetos");
     }
     console.log(status);
     setError(true);
