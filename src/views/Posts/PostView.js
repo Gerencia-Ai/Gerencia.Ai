@@ -1,13 +1,6 @@
-import {
-  Text,
-  ScrollView,
-  View,
-  FlatList,
-  Image,
-  TextInput,
-} from "react-native";
+import { Text, ScrollView, View, Image, TextInput } from "react-native";
 
-import commentService from "../services/comments";
+import commentService from "../../services/comments";
 import { useEffect, useState } from "react";
 
 const Profile =
@@ -20,12 +13,9 @@ export default function Postagens() {
     async function fetchData() {
       const data = await commentService.getAllComments();
       setComments(data);
-      console.log(datas)
     }
     fetchData();
   }, []);
-
-
 
   return (
     <ScrollView className="flex-1  bg-main px-8 pb-28">
@@ -65,7 +55,7 @@ export default function Postagens() {
 
           <Text className="opacity-60 font-bold my-3">
             Sed cursus erat ac lacus elementum:
-            <FlatList
+            {/* <FlatList
               data={[
                 { key: "id ornare lorem" },
                 { key: "accumsan" },
@@ -75,12 +65,12 @@ export default function Postagens() {
               renderItem={({ item }) => (
                 <Text className="opacity-70">● {item.key};</Text>
               )}
-            />
+            /> */}
           </Text>
         </View>
 
         <View>
-          <Text className="mb-3">10 Comentários</Text>
+          <Text className="mb-3">{comments.length} Comentários</Text>
 
           {/* Add Comment Box */}
 
@@ -102,7 +92,10 @@ export default function Postagens() {
         <View className="flex flex-col pr-12 mt-2">
           {comments.map((comment) => (
             <View className="mt-1 flex flex-col w-full" key={comment.id}>
-              <Text className="text-shadow text-sm w-full"> {comment.usuario} </Text>
+              <Text className="text-shadow text-sm w-full">
+                {" "}
+                {comment.usuario}{" "}
+              </Text>
               <Text className="text-sm"> {comment.texto} </Text>
             </View>
           ))}
