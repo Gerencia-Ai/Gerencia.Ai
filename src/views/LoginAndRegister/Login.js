@@ -60,7 +60,7 @@ export default function App({ navigation }) {
       </View>
 
       {error && (
-        <View className="text-red-400">
+        <View className="text-red-500">
           <Text>Email ou senha incorretos.</Text>
         </View>
       )}
@@ -88,7 +88,7 @@ export default function App({ navigation }) {
           name="Email"
         />
         {errors.Email && (
-          <Text className="text-red-400">
+          <Text className="text-red-500">
             Por favor insira um e-mail válido.
           </Text>
         )}

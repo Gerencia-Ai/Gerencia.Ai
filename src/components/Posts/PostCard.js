@@ -9,10 +9,6 @@ class ProjCard extends Component {
         onPress={() => this.props.navigation.navigate("Post")}
       >
         <View className="pb-1">
-          {/* <Text>
-            Professor 1 postou um novo comunicado:
-          </Text> */}
-
           <Text className="my-2 font-medium text-lg">
             {this.props.post.titulo}
           </Text>
