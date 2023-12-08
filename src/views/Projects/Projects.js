@@ -2,7 +2,6 @@ import { Text, ScrollView, ActivityIndicator } from "react-native";
 import { useState, useEffect } from "react";
 import ProjCard from "../../components/Projects/ProjectCard";
 import { getAll } from "../../services/Getters/projects";
-import EnterDebug from "../../components/globals/EnterDebug";
 
 export default function Projetos({ navigation }) {
   //state for posts
@@ -47,7 +46,6 @@ export default function Projetos({ navigation }) {
           <ActivityIndicator size="large" color="#0000ff" />
         )}
       </ScrollView>
-      <EnterDebug navigation={navigation} />
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Text, ScrollView, ActivityIndicator } from "react-native";
+import { Text, ScrollView, ActivityIndicator, View } from "react-native";
 import { useState, useEffect } from "react";
 import PostsService from "../../services/Getters/posts";
 import PostCard from "../../components/Posts/PostCard.js";
@@ -33,6 +33,10 @@ export default function Projetos({ navigation, route }) {
       {posts.map((post) => (
         <PostCard key={post.id} post={post} navigation={navigation} />
       ))}
+
+      <View className="p-10 divide-slate-800"></View>
+      <View></View>
+      <View className="p-10 divide-slate-800"></View>
     </ScrollView>
   );
 }

@@ -1,14 +1,13 @@
 import { Text, ScrollView, View, Image, TextInput } from "react-native";
 import commentService from "../../services/comments";
-import { useEffect, useState } from "react";
+import { Children, useEffect, useState } from "react";
 import ParsedText from "react-native-parsed-text";
 
 const Profile =
   "https://lens-storage.storage.googleapis.com/png/2cb7d9a152804c0ba73f51a98e63b6a7";
 
-export default function Postagens() {
+export default function Postagens({ navigation, route }) {
   const [comments, setComments] = useState([]);
-
   useEffect(() => {
     async function fetchData() {
       const data = await commentService.getAllComments();
@@ -37,53 +36,14 @@ export default function Postagens() {
           },
         ]}
       >
-        Prazo *extendido* para !quinta-feira!
+        {route.params.post.titulo}
       </ParsedText>
 
       {/* Post Body */}
       <View className="bg-secondary text-dark p-2 rounded-md border border-stroke my-2 divide-y divide-stroke">
         <View className="">
-          <Text className="text-base font-semibold my-3">
-            Lorem ipsum dolor sit amet:
-          </Text>
-
           {/* Quero Fazer com que haja formatação de texto nesse app, podendo enviar textos com partes em bold e italic */}
-          <Text className="opacity-70">
-            consectetur adipiscing elit. Vestibulum malesuada mollis magna non
-            maximus. Donec ut quam sed sem efficitur mattis. Morbi eleifend
-            consequat accumsan.
-          </Text>
-
-          <Text className="opacity-70 font-bold my-3">
-            Nulla scelerisque
-            <Text className="font-normal"> gravida auctor. </Text>
-          </Text>
-
-          <Text className="opacity-70">
-            dapibus nulla vel, dapibus ante. Maecenas condimentum iaculis magna,
-            id commodo nisi efficitur eu. Vivamus semper commodo odio sed
-            rutrum. Nullam quis velit vulputate, finibus quam sit amet, lacinia
-            diam. Cras ut eros non est scelerisque porta et eu velit. Phasellus
-            ligula dui, efficitur consectetur efficitur sit amet, finibus sed
-            sem. Vivamus nec ligula id erat volutpat dapibus quis a ex. Integer
-            venenatis, arcu et pulvinar gravida, tellus odio aliquet diam, ac
-            posuere velit tellus nec lorem.
-          </Text>
-
-          <Text className="opacity-60 font-bold my-3">
-            Sed cursus erat ac lacus elementum:
-            {/* <FlatList
-              data={[
-                { key: "id ornare lorem" },
-                { key: "accumsan" },
-                { key: "Aenean a cursus nibh" },
-                { key: "vitae vulputate tellus" },
-              ]}
-              renderItem={({ item }) => (
-                <Text className="opacity-70">● {item.key};</Text>
-              )}
-            /> */}
-          </Text>
+          <Parsed text={route.params.post.descricao} style="text-lg" />
         </View>
 
         <View>
@@ -121,3 +81,26 @@ export default function Postagens() {
     </ScrollView>
   );
 }
+
+const Parsed = (props) => {
+  return (
+    <ParsedText
+      className={props.style}
+      parse={[
+        {
+          pattern: /\*([^\*]+)\*/,
+          style: { fontWeight: "bold", color: "#FFC107" },
+          renderText: (text) => text.replace(/\*(.*?)\*/g, "$1"),
+        },
+        {
+          // red
+          pattern: /\!([^\!]+)\!/,
+          style: { fontWeight: "bold", color: "#dc2626" },
+          renderText: (text) => text.replace(/\!(.*?)\!/g, "$1"),
+        },
+      ]}
+    >
+      {props.text}
+    </ParsedText>
+  );
+};

@@ -6,7 +6,9 @@ class ProjCard extends Component {
     return (
       <Pressable
         className="bg-secondary p-2 rounded-md border border-stroke my-2 text-dark divide-y divide-stroke"
-        onPress={() => this.props.navigation.navigate("Post")}
+        onPress={() =>
+          this.props.navigation.navigate("Post", { post: this.props.post })
+        }
       >
         <View className="pb-1">
           <Text className="my-2 font-medium text-lg">
