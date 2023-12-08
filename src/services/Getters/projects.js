@@ -9,7 +9,7 @@ export async function getAll() {
     try {
       let token = await getItem("token");
       let request = await axios.get(
-        "https://gerencia-back-7ap3-dev.fl0.io/api/projetos/",
+        "https://gerencia-back-dev-kbzk.4.us-1.fl0.io/api/projetos/",
         {
           headers: {
             Authorization: "Bearer " + token,

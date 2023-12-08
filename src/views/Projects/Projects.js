@@ -15,6 +15,7 @@ export default function Projetos({ navigation }) {
       const response = await getAll().catch((err) => {
         console.log(err);
       });
+
       setProjects(response);
       setLoading(false);
     } catch (error) {
@@ -32,16 +33,19 @@ export default function Projetos({ navigation }) {
       <ScrollView className="flex-1  bg-main px-8 pb-28">
         <Text className="mt-16 mb-6 text-2xl">Seus Projetos</Text>
         {/* Loading indicator */}
-        {loading && <ActivityIndicator size="large" color="#0000ff" />}
         {!projects && !loading && <Text>Nenhum projeto encontrado</Text>}
 
-        {projects.map((project) => (
-          <ProjCard
-            key={project.id}
-            projeto={project}
-            navigation={navigation}
-          />
-        ))}
+        {!loading && projects && projects.length > 0 ? (
+          projects.map((project) => (
+            <ProjCard
+              key={project.id}
+              projeto={project}
+              navigation={navigation}
+            />
+          ))
+        ) : (
+          <ActivityIndicator size="large" color="#0000ff" />
+        )}
       </ScrollView>
       <EnterDebug navigation={navigation} />
     </>

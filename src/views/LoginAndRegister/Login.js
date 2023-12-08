@@ -18,8 +18,8 @@ export default function App({ navigation }) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      Email: "",
-      Password: "",
+      Email: "gustavodep.gorges@gmail.com",
+      Password: "132645978Aa",
     },
   });
 
@@ -43,6 +43,7 @@ export default function App({ navigation }) {
   const onSubmit = async (data) => {
     setLoading(true);
     let status = await login(data.Email, data.Password);
+    console.log(status);
     if (status) {
       await saveItem("token", status.access);
       setLoading(false);

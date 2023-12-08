@@ -5,14 +5,19 @@ export async function login(email, password) {
     try {
       console.log("Login was called with", email, password);
       let request = await axios.post(
-        "https://gerencia-back-7ap3-dev.fl0.io/token/",
+        "https://gerencia-back-dev-kbzk.4.us-1.fl0.io/api/token/",
         {
           email: email,
           password: password,
         }
       );
-      resolve(request.data);
+      if (request.status == 200) {
+        resolve(request.data);
+      } else {
+        reject(request);
+      }
     } catch (error) {
+      console.log(error);
       reject(error);
     }
   });
